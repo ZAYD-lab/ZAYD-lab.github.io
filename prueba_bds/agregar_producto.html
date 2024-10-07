@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregar Producto</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h1>Agregar Nuevo Producto</h1>
+
+    <!-- Formulario para agregar usuario -->
+    <form id="form-agregar" method="POST">
+        <label for="id_producto">Id producto:</label>
+        <input type="text" id="id_producto" name="id_producto" value="" required><br><br>
+
+        <label for="nombre_pd">Producto:</label>
+        <input type="text" id="id_producto" name="id_producto" value="" required><br><br>
+
+        <label for="cantidad_pd">Cantidad:</label>
+        <input type="text" id="cantidad_pd" name="cantidad_pd" value="" required><br><br>
+
+        <label for="precio_pd">Precio:</label>
+        <input type="precio_pd" id="precio_pd" name="precio_pd" value="" required><br><br>
+
+        <button type="submit">Agregar Producto</button>
+    </form>
+
+    <p id="mensaje" style="color: green; display: none;">Producto agregado exitosamente.</p>
+    <p id="error" style="color: red; display: none;">Ocurrió un error al agregar el producto.</p>
+
+    <script>
+        $(document).ready(function() {
+            // Manejar la acción de envío del formulario
+            $("#form-agregar").submit(function(e){
+                e.preventDefault(); // Evitar el comportamiento por defecto del formulario
+
+                // Obtener los valores del formulario
+                var id_producto = $("#id_producto").val();
+                var nombre_pd = $("#nombre_pd").val();
+                var cantidad_pd = $("#cantidad_pd").val();
+                var precio_pd = $("#precio_pd").val();
+
+                // Enviar los datos usando AJAX
+                $.ajax({
+                    url: 'agregar_producto.php',
+                    type: 'POST',
+                    data: {
+                        id_producto: id_producto,
+                        nombre_pd: nombre_pd,
+                        cantidad_pd: cantidad_pd,
+                        precio_pd: precio_pd
+                    },
+                    success: function(response) {
+                        // Limpiar los campos del formulario
+                        if (response === 'success') {
+                            $("#form-agregar")[0].reset();
+                            $("#mensaje").show();
+                            $("#error").hide();
+                        } else {
+                            $("#error").show();
+                            $("#mensaje").hide();
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

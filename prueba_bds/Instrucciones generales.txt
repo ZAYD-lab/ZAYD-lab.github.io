@@ -1,0 +1,9 @@
+PAGINA DE COMERCIO
+
+Definir tablas de la base 
+
+Usuarios(id_usuario, nombre, usuario, correo)
+Producto(id_producto, nombre, precio, cantidad)
+Venta(id_venta,id_usuario,fecha_venta, dinero)
+
+Definir registros
